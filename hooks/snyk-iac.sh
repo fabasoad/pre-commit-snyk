@@ -1,3 +1,3 @@
 #!/bin/bash
 set -eu
-snyk iac test "$1"
+snyk iac test "$@"
