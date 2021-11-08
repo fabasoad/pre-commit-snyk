@@ -14,6 +14,8 @@ then
      os="win"
   fi
 
-  curl -s https://static.snyk.io/cli/latest/release.json | jq ".assets.\"snyk-${os}\".url" | xargs curl --output "${HOME}"/bin/snyk
-  export PATH="${HOME}/bin/:$PATH"
+  INSTALLATION_DIR="${HOME}"/bin
+  mkdir -p "${INSTALLATION_DIR}"
+  curl -s https://static.snyk.io/cli/latest/release.json | jq ".assets.\"snyk-${os}\".url" | xargs curl --output "${INSTALLATION_DIR}"/snyk
+  export PATH="${INSTALLATION_DIR}/:$PATH"
 fi
