@@ -17,5 +17,6 @@ then
   INSTALLATION_DIR="${HOME}"/bin
   mkdir -p "${INSTALLATION_DIR}"
   curl -s https://static.snyk.io/cli/latest/release.json | jq ".assets.\"snyk-${os}\".url" | xargs curl --output "${INSTALLATION_DIR}"/snyk
+  chmod +x "${INSTALLATION_DIR}"/snyk
   export PATH="${INSTALLATION_DIR}/:$PATH"
 fi
