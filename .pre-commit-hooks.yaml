@@ -1,0 +1,14 @@
+---
+- id: snyk-iac
+  name: Runs Snyk IaC
+  description: Runs 'snyk iac test' command
+  entry: hooks/snyk-iac.sh
+  language: script
+  pass_filenames: false
+
+- id: snyk-test
+  name: Runs Snyk test
+  description: Runs 'snyk test' command
+  entry: hooks/snyk-test.sh
+  language: script
+  pass_filenames: false
