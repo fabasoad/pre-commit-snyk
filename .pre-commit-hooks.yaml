@@ -1,4 +1,11 @@
 ---
+- id: snyk-container
+  name: Snyk Container
+  description: Runs 'snyk container test' command
+  entry: hooks/snyk-container.sh
+  language: script
+  pass_filenames: false
+
 - id: snyk-iac
   name: Snyk IaC
   description: Runs 'snyk iac test' command
