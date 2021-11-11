@@ -3,7 +3,6 @@ set -eu
 SCRIPT_DIR="$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)"
 bash "${SCRIPT_DIR}"/_check-installation.sh
 
-image="snyk-container-test:$(date +%s)"
 for i in "$@"; do
   case $i in
     -i=*|--image=*)
@@ -15,5 +14,10 @@ for i in "$@"; do
   esac
 done
 
-docker build -t "${image}" .
+if [ -z "${image:-}" ]
+then
+  image="snyk-container-test:$(date +%s)"
+  docker build -t "${image}" .
+fi
+
 snyk container test "${image}" "$@"
