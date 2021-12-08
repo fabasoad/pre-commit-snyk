@@ -3,21 +3,22 @@ set -eu
 SCRIPT_DIR="$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)"
 bash "${SCRIPT_DIR}"/_check-installation.sh
 
-for i in "$@"; do
-  case $i in
-    -i=*|--image=*)
-      image="${i#*=}"
-      ;;
-    *)
-      # unknown option
-      ;;
-  esac
+prefix="[pre-commit-snyk]"
+
+tag=$(date +%s)
+i=1
+# shellcheck disable=SC2044
+for file_path in $(find . -type f -name "Dockerfile"); do
+  image="pre-commit-snyk:$tag-$i"
+  if [[ $i -gt 1 ]]
+  then
+    echo ""
+  fi
+  printf "%s Building %s from %s\n\n" "$prefix" "$image" "$file_path"
+  docker build -t "$image" "$(echo "$file_path" | rev | cut -d'/' -f2- | rev)"
+  printf "\n%s Testing %s\n\n" "$prefix" "$image"
+  snyk container test "$image" "--file=$file_path" "$@"
+  printf "\n%s Removing %s\n\n" "$prefix" "$image"
+  docker rmi "$(docker images "$image" -q)" || printf "\n%s Unable to remove %s" "$prefix" "$image"
+  i=$((i + 1))
 done
-
-if [ -z "${image:-}" ]
-then
-  image="snyk-container-test:$(date +%s)"
-  docker build -t "${image}" .
-fi
-
-snyk container test "${image}" "$@"
