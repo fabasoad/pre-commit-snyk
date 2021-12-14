@@ -21,7 +21,6 @@ tag=$(date +%s)
 i=1
 
 for file_path in "${dockerfiles[@]}"; do
-  printf "%s %s\n" "$prefix" "$file_path"
   image="pre-commit-snyk:$tag-$i"
   if [[ $i -gt 1 ]]
   then
