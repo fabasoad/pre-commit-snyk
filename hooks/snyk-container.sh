@@ -6,19 +6,11 @@ bash "${SCRIPT_DIR}"/_check-installation.sh
 prefix="[pre-commit-snyk]"
 
 tag=$(date +%s)
-i=1
-# shellcheck disable=SC2044
-for file_path in $(find . -type f -name "Dockerfile"); do
-  image="pre-commit-snyk:$tag-$i"
-  if [[ $i -gt 1 ]]
-  then
-    echo ""
-  fi
-  printf "%s Building %s from %s\n\n" "$prefix" "$image" "$file_path"
-  docker build -t "$image" "$(echo "$file_path" | rev | cut -d'/' -f2- | rev)"
-  printf "\n%s Testing %s\n\n" "$prefix" "$image"
-  snyk container test "$image" "--file=$file_path" "$@"
-  printf "\n%s Removing %s\n\n" "$prefix" "$image"
-  docker rmi "$(docker images "$image" -q)" || printf "\n%s Unable to remove %s" "$prefix" "$image"
-  i=$((i + 1))
-done
+
+image="pre-commit-snyk:$tag-$((1 + RANDOM))"
+printf "%s Building %s from %s\n\n" "$prefix" "$image" "$1"
+docker build -t "$image" "$(echo "$1" | rev | cut -d'/' -f2- | rev)"
+printf "\n%s Testing %s\n\n" "$prefix" "$image"
+snyk container test "$image" "--file=$1" "$@"
+printf "\n%s Removing %s\n\n" "$prefix" "$image"
+docker rmi "$(docker images "$image" -q)" || printf "\n%s Unable to remove %s\n\n" "$prefix" "$image"
