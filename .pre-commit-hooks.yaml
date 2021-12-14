@@ -4,7 +4,9 @@
   description: Runs 'snyk container test' command
   entry: hooks/snyk-container.sh
   language: script
-  pass_filenames: false
+  pass_filenames: true
+  files: Dockerfile
+  types: [file, text]
 
 - id: snyk-iac
   name: Snyk IaC
