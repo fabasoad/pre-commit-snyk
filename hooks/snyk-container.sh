@@ -4,6 +4,8 @@ SCRIPT_DIR="$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)"
 bash "${SCRIPT_DIR}"/_check-installation.sh
 
 prefix="[pre-commit-snyk]"
+# shellcheck disable=SC2068
+echo $@
 
 tag=$(date +%s)
 
