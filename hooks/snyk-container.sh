@@ -30,7 +30,7 @@ for file_path in "${dockerfiles[@]}"; do
   docker build -t "$image" "$(echo "$file_path" | rev | cut -d'/' -f2- | rev)"
   printf "\n%s Testing %s\n" "$prefix" "$image"
   snyk container test "$image" "--file=$file_path" "${snyk_args[*]}"
-  printf "\n%s Removing %s\n" "$prefix" "$image"
-  docker rmi "$(docker images "$image" -q)" || printf "%s Unable to remove %s" "$prefix" "$image"
+  printf "\n%s Removing %s" "$prefix" "$image"
+  docker rmi "$(docker images "$image" -q)" || printf "\n%s Unable to remove %s" "$prefix" "$image"
   i=$((i + 1))
 done
