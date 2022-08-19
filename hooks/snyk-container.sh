@@ -5,14 +5,12 @@ bash "${SCRIPT_DIR}"/_check-installation.sh
 
 snyk_args=()
 dockerfiles=()
-i=1
 for arg in "$@"; do
   if [[ $arg == *Dockerfile ]]; then
     dockerfiles+=("$arg")
   else
     snyk_args+=("$arg")
   fi
-  i=$((i + 1))
 done
 
 prefix="[pre-commit-snyk]"
