@@ -2,15 +2,6 @@
 default_stages: ["commit"]
 exclude: ^.gitleaks.toml$
 repos:
-  - repo: local
-    hooks:
-      - id: pre-commit-autoupdate
-        name: pre-commit-autoupdate
-        entry: pre-commit autoupdate
-        language: system
-        pass_filenames: false
-        verbose: true
-        stages: ["push"]
   # Security
   - repo: https://github.com/Yelp/detect-secrets
     rev: v1.3.0
@@ -44,8 +35,6 @@ repos:
     hooks:
       - id: check-merge-conflict
       - id: check-json
-      - id: detect-aws-credentials
-        stages: ["commit", "push"]
       - id: detect-private-key
         stages: ["commit", "push"]
       - id: end-of-file-fixer
@@ -55,3 +44,5 @@ repos:
       - id: no-commit-to-branch
       - id: trailing-whitespace
         stages: ["commit"]
+ci:
+  autofix_prs: false
