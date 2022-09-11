@@ -1,6 +1,7 @@
 # Snyk pre-commit hooks
 
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/fabasoad/pre-commit-snyk/main.svg)](https://results.pre-commit.ci/latest/github/fabasoad/pre-commit-snyk/main)
+<!-- markdownlint-disable-next-line MD013 -->
+![Functional Tests](https://github.com/fabasoad/pre-commit-snyk/workflows/Functional%20Tests/badge.svg) [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/fabasoad/pre-commit-snyk/main.svg)](https://results.pre-commit.ci/latest/github/fabasoad/pre-commit-snyk/main) [![GitGuardian](https://img.shields.io/badge/gitguardian-passed-brightgreen)](https://github.com/fabasoad/pre-commit-snyk)
 
 1. [snyk-container](#snyk-container)
 2. [snyk-iac](#snyk-iac)
@@ -11,10 +12,9 @@
 Take into account that in case `snyk` is not installed locally it will be
 automatically installed by `npm` **globally**.
 
-To use any of these hooks there are some additional dependencies are required
-to be installed:
-
-- Either [snyk](https://docs.snyk.io/snyk-cli/install-the-snyk-cli) or [npm](https://nodejs.org/en/download/)
+To use any of these hooks **one of the following dependencies** have to be
+installed: [snyk](https://docs.snyk.io/snyk-cli/install-the-snyk-cli), [yarn](https://yarnpkg.com/cli/install)
+or [npm](https://nodejs.org/en/download/).
 
 ## Documentation
 
