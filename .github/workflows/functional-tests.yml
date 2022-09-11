@@ -28,9 +28,7 @@ jobs:
           ref: ${{ github.ref }}
       - name: Configure scoop
         if: ${{ matrix.os == 'windows-latest' }}
-        run: |
-          Set-ExecutionPolicy RemoteSigned -Scope CurrentUser # Optional: Needed to run a remote script the first time
-          irm get.scoop.sh | iex
+        run: iwr -useb get.scoop.sh | iex
         shell: powershell
       - name: Configure yarn
         if: ${{ matrix.os == 'windows-latest' && matrix.type == 'yarn' }}
