@@ -16,8 +16,12 @@ jobs:
       matrix:
         os: ['macos-latest', 'ubuntu-latest', 'windows-latest']
         type: ['npm', 'yarn', 'brew']
+        exclude:
+          - os: ubuntu-latest
+            type: brew
+          - os: windows-latest
+            type: brew
     runs-on: ${{ matrix.os }}
-    if: ${{ (matrix.type == 'brew' && matrix.os == 'macos-latest') || (matrix.type != 'brew') }}
     steps:
       - uses: actions/checkout@v3
         with:
