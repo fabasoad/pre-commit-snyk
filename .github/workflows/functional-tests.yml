@@ -30,9 +30,11 @@ jobs:
       - name: Install snyk (${{ matrix.type }})
         run: ./hooks/_installation.sh
         shell: bash
-      - name: Print version
+      - name: Print yarn version
         run: |
           yarn global bin
           yarn global bin | ls
-          snyk --version
+        shell: bash
+      - name: Print version
+        run: snyk --version
         shell: bash
