@@ -25,5 +25,5 @@ jobs:
         if: ${{ matrix.type == 'npm' }}
         run: npm uninstall -g yarn
       - name: Install snyk
-        run: ./_check-installation.sh
+        run: ./hooks/_check-installation.sh
         shell: bash
