@@ -1,7 +1,7 @@
 # Snyk pre-commit hooks
 
 <!-- markdownlint-disable-next-line MD013 -->
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/fabasoad/pre-commit-snyk/main.svg)](https://results.pre-commit.ci/latest/github/fabasoad/pre-commit-snyk/main) [![GitGuardian](https://img.shields.io/badge/gitguardian-passed-brightgreen)](https://github.com/fabasoad/pre-commit-snyk)
+![Functional Tests](https://github.com/fabasoad/pre-commit-snyk/workflows/Functional%20Tests/badge.svg) [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/fabasoad/pre-commit-snyk/main.svg)](https://results.pre-commit.ci/latest/github/fabasoad/pre-commit-snyk/main) [![GitGuardian](https://img.shields.io/badge/gitguardian-passed-brightgreen)](https://github.com/fabasoad/pre-commit-snyk)
 
 1. [snyk-container](#snyk-container)
 2. [snyk-iac](#snyk-iac)

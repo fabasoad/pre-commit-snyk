@@ -30,3 +30,5 @@ jobs:
       - name: Install snyk (${{ matrix.type }})
         run: ./hooks/_installation.sh
         shell: bash
+      - name: Print version
+        run: snyk --version
