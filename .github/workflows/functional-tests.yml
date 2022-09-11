@@ -23,7 +23,12 @@ jobs:
           ref: ${{ github.ref }}
       - name: Uninstall yarn
         if: ${{ matrix.type == 'npm' }}
-        run: npm uninstall -g yarn
+        run: |
+          if '${{ matrix.os }}' == 'macos-latest'; then
+            brew uninstall yarn
+          else
+            npm uninstall -g yarn
+          fi
       - name: Install snyk
-        run: ./hooks/_check-installation.sh
+        run: ./hooks/_installation.sh
         shell: bash
