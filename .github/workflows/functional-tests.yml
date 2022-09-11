@@ -15,24 +15,26 @@ jobs:
     strategy:
       matrix:
         os: ['macos-latest', 'ubuntu-latest', 'windows-latest']
-        type: ['npm', 'yarn']
+        type: ['npm', 'yarn', 'brew']
+        exclude:
+          - os: ubuntu-latest
+            type: brew
+          - os: windows-latest
+            type: brew
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.ref }}
+      - name: Setup scoop
+        if: ${{ matrix.os == 'windows-latest' && matrix.type == 'scoop' }}
+        uses: MinoruSekine/setup-scoop@main
       - name: Configure yarn
         if: ${{ matrix.os == 'windows-latest' && matrix.type == 'yarn' }}
         run: yarn global bin | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
         shell: powershell
-      - name: Uninstall yarn (macos-latest)
-        if: ${{ matrix.type == 'npm' && matrix.os == 'macos-latest' }}
-        run: rm -rf "$HOME/.yarn"
-      - name: Uninstall yarn (ubuntu-latest, windows-latest)
-        if: ${{ matrix.type == 'npm' && matrix.os != 'macos-latest' }}
-        run: npm uninstall -g yarn
       - name: Install snyk (${{ matrix.type }})
-        run: ./hooks/_installation.sh
+        run: ./hooks/installation/install-${{ matrix.type }}.sh
         shell: bash
       - name: Print version
         run: snyk --version
