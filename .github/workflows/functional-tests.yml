@@ -1,0 +1,29 @@
+---
+name: Functional Tests
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'fix-**'
+      - 'feature-**'
+
+jobs:
+  functional_tests:
+    name: Install snyk
+    timeout-minutes: 5
+    strategy:
+      matrix:
+        os: ['macos-latest', 'ubuntu-latest', 'windows-latest']
+        type: ['npm', 'yarn']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.ref }}
+      - name: Uninstall yarn
+        if: ${{ matrix.type == 'npm' }}
+        run: npm uninstall -g yarn
+      - name: Install snyk
+        run: _check-installation.sh
+        shell: bash

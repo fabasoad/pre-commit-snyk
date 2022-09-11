@@ -3,5 +3,10 @@ set -eu
 
 if ! command -v snyk &> /dev/null
 then
-  npm install snyk@latest -g
+  if command -v yarn &> /dev/null
+  then
+    yarn global add snyk
+  else
+    npm install snyk@latest -g
+  fi
 fi
