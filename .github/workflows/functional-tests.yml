@@ -28,7 +28,7 @@ jobs:
           ref: ${{ github.ref }}
       - name: Configure scoop
         if: ${{ matrix.os == 'windows-latest' }}
-        run: iwr -useb get.scoop.sh | iex
+        run: irm get.scoop.sh | iex
         shell: powershell
       - name: Configure yarn
         if: ${{ matrix.os == 'windows-latest' && matrix.type == 'yarn' }}
