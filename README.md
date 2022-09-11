@@ -13,8 +13,8 @@ Take into account that in case `snyk` is not installed locally it will be
 automatically installed by `npm` **globally**.
 
 To use any of these hooks **one of the following dependencies** have to be
-installed: [snyk](https://docs.snyk.io/snyk-cli/install-the-snyk-cli), [yarn](https://yarnpkg.com/cli/install)
-or [npm](https://nodejs.org/en/download/).
+installed: [snyk](https://docs.snyk.io/snyk-cli/install-the-snyk-cli), [yarn](https://yarnpkg.com/cli/install),
+[npm](https://nodejs.org/en/download/), [brew](https://brew.sh/) or [scoop](https://scoop.sh/).
 
 ## Documentation
 
