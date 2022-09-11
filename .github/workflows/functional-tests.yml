@@ -31,6 +31,7 @@ jobs:
         run: ./hooks/_installation.sh
         shell: bash
       - name: Print yarn version
+        if: ${{ matrix.type == 'yarn' }}
         run: |
           yarn global bin
           yarn global bin | ls
