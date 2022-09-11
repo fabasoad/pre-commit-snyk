@@ -31,4 +31,8 @@ jobs:
         run: ./hooks/_installation.sh
         shell: bash
       - name: Print version
-        run: snyk --version
+        run: |
+          yarn global bin
+          yarn global bin | ls
+          snyk --version
+        shell: bash
