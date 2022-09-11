@@ -30,13 +30,17 @@ jobs:
       - name: Install snyk (${{ matrix.type }})
         run: ./hooks/_installation.sh
         shell: bash
-      - name: Debug yarn
-        if: ${{ matrix.type == 'yarn' }}
-        run: |
-          yarn global bin
-          yarn global bin | ls
-          echo "Path: $PATH"
-        shell: bash
+#      - name: Debug yarn
+#        if: ${{ matrix.type == 'yarn' }}
+#        run: |
+#          yarn global bin
+#          yarn global bin | ls
+#          echo "Path: $PATH"
+#        shell: bash
+      - name: Add snyk to PATH
+        if: ${{ matrix.os == 'windows-latest' && matrix.type == 'yarn' }}
+        run: yarn global bin | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+        shell: powershell
       - name: Print version
         run: snyk --version
         shell: bash
