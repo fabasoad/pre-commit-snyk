@@ -26,6 +26,12 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.ref }}
+      - name: Configure scoop
+        if: ${{ matrix.os == 'windows-latest' }}
+        run: |
+          Set-ExecutionPolicy RemoteSigned -Scope CurrentUser # Optional: Needed to run a remote script the first time
+          irm get.scoop.sh | iex
+        shell: powershell
       - name: Configure yarn
         if: ${{ matrix.os == 'windows-latest' && matrix.type == 'yarn' }}
         run: yarn global bin | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
@@ -33,7 +39,7 @@ jobs:
       - name: Install snyk (${{ matrix.type }})
         run: ./hooks/installation/install-${{ matrix.type }}.sh
         shell: bash
-      - name: Debug
+      - name: Print scoop version
         if: ${{ matrix.os == 'windows-latest' }}
         run: scoop --version
       - name: Print version
