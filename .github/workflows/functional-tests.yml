@@ -27,7 +27,7 @@ jobs:
         with:
           ref: ${{ github.ref }}
       - name: Setup scoop
-        if: ${{ matrix.os == 'windows-latest' }}
+        if: ${{ matrix.os == 'windows-latest' && matrix.type == 'scoop' }}
         uses: MinoruSekine/setup-scoop@main
       - name: Configure yarn
         if: ${{ matrix.os == 'windows-latest' && matrix.type == 'yarn' }}
@@ -36,9 +36,6 @@ jobs:
       - name: Install snyk (${{ matrix.type }})
         run: ./hooks/installation/install-${{ matrix.type }}.sh
         shell: bash
-      - name: Print scoop version
-        if: ${{ matrix.os == 'windows-latest' }}
-        run: scoop --version
       - name: Print version
         run: snyk --version
         shell: bash
