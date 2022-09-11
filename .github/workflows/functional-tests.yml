@@ -27,6 +27,6 @@ jobs:
       - name: Uninstall yarn (ubuntu-latest, windows-latest)
         if: ${{ matrix.type == 'npm' && matrix.os != 'macos-latest' }}
         run: npm uninstall -g yarn
-      - name: Install snyk
+      - name: Install snyk (${{ matrix.type }})
         run: ./hooks/_installation.sh
         shell: bash
