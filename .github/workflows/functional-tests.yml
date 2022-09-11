@@ -23,7 +23,7 @@ jobs:
           ref: ${{ github.ref }}
       - name: Uninstall yarn (macos-latest)
         if: ${{ matrix.type == 'npm' && matrix.os == 'macos-latest' }}
-        run: brew uninstall yarn
+        run: which yarn
       - name: Uninstall yarn (ubuntu-latest, windows-latest)
         if: ${{ matrix.type == 'npm' && matrix.os != 'macos-latest' }}
         run: npm uninstall -g yarn
