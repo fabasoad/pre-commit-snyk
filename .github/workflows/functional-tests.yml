@@ -24,7 +24,7 @@ jobs:
       - name: Uninstall yarn
         if: ${{ matrix.type == 'npm' }}
         run: |
-          if '${{ matrix.os }}' == 'macos-latest'; then
+          if [[ "${{ matrix.os }}" == "macos-latest" ]]; then
             brew uninstall yarn
           else
             npm uninstall -g yarn
