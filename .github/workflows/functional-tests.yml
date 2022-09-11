@@ -15,12 +15,16 @@ jobs:
     strategy:
       matrix:
         os: ['macos-latest', 'ubuntu-latest', 'windows-latest']
-        type: ['npm', 'yarn', 'brew']
+        type: ['npm', 'yarn', 'brew', 'scoop']
         exclude:
           - os: ubuntu-latest
             type: brew
           - os: windows-latest
             type: brew
+          - os: ubuntu-latest
+            type: scoop
+          - os: macos-latest
+            type: scoop
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
