@@ -1,9 +1,9 @@
 #!/bin/bash
 set -eu
-SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)"
 
 if ! command -v snyk &> /dev/null
 then
+  SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)"
   if command -v brew &> /dev/null; then
     bash "${SCRIPT_DIR}"/install-brew.sh
   elif command -v scoop &> /dev/null; then
