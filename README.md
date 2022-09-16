@@ -1,7 +1,7 @@
 # Snyk pre-commit hooks
 
 <!-- markdownlint-disable-next-line MD013 -->
-![Functional Tests](https://github.com/fabasoad/pre-commit-snyk/workflows/Functional%20Tests/badge.svg) [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/fabasoad/pre-commit-snyk/main.svg)](https://results.pre-commit.ci/latest/github/fabasoad/pre-commit-snyk/main) [![GitGuardian](https://img.shields.io/badge/gitguardian-passed-brightgreen)](https://github.com/fabasoad/pre-commit-snyk)
+![GitHub release](https://img.shields.io/github/v/release/fabasoad/pre-commit-snyk?include_prereleases) ![Functional Tests](https://github.com/fabasoad/pre-commit-snyk/workflows/Functional%20Tests/badge.svg) [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/fabasoad/pre-commit-snyk/main.svg)](https://results.pre-commit.ci/latest/github/fabasoad/pre-commit-snyk/main) [![BCH compliance](https://bettercodehub.com/edge/badge/fabasoad/pre-commit-snyk?branch=main)](https://bettercodehub.com/)
 
 1. [snyk-container](#snyk-container)
 2. [snyk-iac](#snyk-iac)
@@ -10,10 +10,10 @@
 ## Description
 
 Take into account that in case `snyk` is not installed locally it will be
-automatically installed by `npm` **globally**.
+automatically installed **globally**.
 
-To use any of these hooks **one of the following dependencies** have to be
-installed: [snyk](https://docs.snyk.io/snyk-cli/install-the-snyk-cli), [yarn](https://yarnpkg.com/cli/install),
+To use any of these hooks **one of the following tools** have to be installed:
+[snyk](https://docs.snyk.io/snyk-cli/install-the-snyk-cli), [yarn](https://yarnpkg.com/cli/install),
 [npm](https://nodejs.org/en/download/), [brew](https://brew.sh/) or [scoop](https://scoop.sh/).
 
 ## Documentation

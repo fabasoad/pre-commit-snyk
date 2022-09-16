@@ -14,7 +14,7 @@ repos:
       - id: gitleaks
         stages: ["commit", "push"]
   - repo: https://github.com/gitguardian/ggshield
-    rev: v1.13.2
+    rev: v1.13.3
     hooks:
       - id: ggshield
         language_version: python3
