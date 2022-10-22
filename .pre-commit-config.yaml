@@ -4,17 +4,17 @@ exclude: ^\.gitleaks\.toml$
 repos:
   # Security
   - repo: https://github.com/Yelp/detect-secrets
-    rev: v1.3.0
+    rev: v1.4.0
     hooks:
       - id: detect-secrets
         stages: ["commit", "push"]
   - repo: https://github.com/zricethezav/gitleaks
-    rev: v8.13.0
+    rev: v8.15.0
     hooks:
       - id: gitleaks
         stages: ["commit", "push"]
   - repo: https://github.com/gitguardian/ggshield
-    rev: v1.13.3
+    rev: v1.13.5
     hooks:
       - id: ggshield
         language_version: python3
