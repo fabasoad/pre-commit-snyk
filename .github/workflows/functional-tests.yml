@@ -57,9 +57,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Print info
-        run: |
-          uname -a
-          alpine -version
+        run: uname -a
         shell: bash
       - name: Install snyk
         run: ./hooks/installation/install-standalone.sh
@@ -81,7 +79,8 @@ jobs:
       - name: Print info
         run: |
           uname -a
-          alpine -version
+          dpkg -l
+          dpkg -l | grep alpine
         shell: bash
       - name: Install snyk
         run: ./hooks/installation/install-standalone.sh
