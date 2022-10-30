@@ -52,10 +52,22 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        image: ['mcr.microsoft.com/windows/nanoserver:ltsc2022']
-    runs-on: windows-latest
+        os: ['macos-latest', 'ubuntu-latest', 'windows-latest']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install snyk
+        run: ./hooks/installation/install-standalone.sh
+        shell: bash
+      - name: Print version
+        run: snyk --version
+        shell: bash
+  standalone-alpine:
+    name: Standalone (Alpine)
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
     container:
-      image: ${{ matrix.image }}
+      image: alpine:3.16.2
     steps:
       - uses: actions/checkout@v3
       - name: Install snyk
