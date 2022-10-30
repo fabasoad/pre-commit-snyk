@@ -79,8 +79,7 @@ jobs:
       - name: Print info
         run: |
           uname -a
-          dpkg -l
-          dpkg -l | grep alpine
+          cat /etc/alpine-release
         shell: bash
       - name: Install snyk
         run: ./hooks/installation/install-standalone.sh
