@@ -12,7 +12,6 @@ on:
 jobs:
   package_manager:
     name: Package manager
-    if: false
     timeout-minutes: 5
     strategy:
       fail-fast: false
