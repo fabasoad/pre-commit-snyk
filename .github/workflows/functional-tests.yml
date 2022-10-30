@@ -63,7 +63,7 @@ jobs:
         run: snyk --version
         shell: bash
   standalone-alpine:
-    name: Standalone (alpine)
+    name: Standalone (alpine-latest)
     timeout-minutes: 5
     runs-on: ubuntu-latest
     container:
@@ -73,6 +73,9 @@ jobs:
       - name: Install tools
         run: apk add bash curl
         shell: sh
+      - name: Print info
+        run: uname -a
+        shell: bash
       - name: Install snyk
         run: ./hooks/installation/install-standalone.sh
         shell: bash
