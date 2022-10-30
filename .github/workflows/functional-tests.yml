@@ -57,7 +57,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Print info
-        run: uname -a
+        run: |
+          uname -a
+          alpine -version
         shell: bash
       - name: Install snyk
         run: ./hooks/installation/install-standalone.sh
@@ -77,7 +79,9 @@ jobs:
         run: apk add bash curl
         shell: sh
       - name: Print info
-        run: uname -a
+        run: |
+          uname -a
+          alpine -version
         shell: bash
       - name: Install snyk
         run: ./hooks/installation/install-standalone.sh
