@@ -52,8 +52,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ['macos-latest', 'ubuntu-latest', 'windows-latest']
-    runs-on: ${{ matrix.os }}
+        image: ['mcr.microsoft.com/windows/nanoserver:ltsc2022']
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ matrix.image }}
     steps:
       - uses: actions/checkout@v3
       - name: Install snyk
