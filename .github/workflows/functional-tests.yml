@@ -56,11 +56,6 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v3
-      - name: Print info
-        run: |
-          uname -a
-          cat /etc/alpine-release
-        shell: bash
       - name: Install snyk
         run: ./hooks/installation/install-standalone.sh
         shell: bash
@@ -78,11 +73,6 @@ jobs:
       - name: Install tools
         run: apk add bash curl
         shell: sh
-      - name: Print info
-        run: |
-          uname -a
-          cat /etc/alpine-release
-        shell: bash
       - name: Install snyk
         run: ./hooks/installation/install-standalone.sh
         shell: bash
