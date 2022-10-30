@@ -27,6 +27,8 @@ if [[ "$(uname -a)" == *"alpine"* ]]; then
   binary="snyk-alpine"
 fi
 
+echo "GET https://static.snyk.io/cli/latest/$binary"
+
 curl https://static.snyk.io/cli/latest/$binary -o snyk$ext
 chmod +x ./snyk$ext
 PATH=$PATH:$(pwd)

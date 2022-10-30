@@ -15,6 +15,7 @@ jobs:
     if: false
     timeout-minutes: 5
     strategy:
+      fail-fast: false
       matrix:
         os: ['macos-latest', 'ubuntu-latest', 'windows-latest']
         type: ['npm', 'yarn', 'brew', 'scoop']
@@ -49,6 +50,7 @@ jobs:
     name: Standalone
     timeout-minutes: 5
     strategy:
+      fail-fast: false
       matrix:
         os: ['macos-latest', 'ubuntu-latest', 'windows-latest']
     runs-on: ${{ matrix.os }}
