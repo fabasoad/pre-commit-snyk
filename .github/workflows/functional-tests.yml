@@ -70,6 +70,9 @@ jobs:
       image: alpine:3.16.2
     steps:
       - uses: actions/checkout@v3
+      - name: Install tools
+        run: apk add bash
+        shell: sh
       - name: Install snyk
         run: ./hooks/installation/install-standalone.sh
         shell: bash
