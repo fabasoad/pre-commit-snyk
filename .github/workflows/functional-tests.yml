@@ -7,10 +7,12 @@ on:
       - 'main'
       - 'fix-**'
       - 'feature-**'
+      - 'pre-commit-ci-update-config'
 
 jobs:
-  functional_tests:
-    name: Install snyk
+  package_manager:
+    name: Package manager
+    if: false
     timeout-minutes: 5
     strategy:
       matrix:
@@ -39,6 +41,21 @@ jobs:
         shell: powershell
       - name: Install snyk (${{ matrix.type }})
         run: ./hooks/installation/install-${{ matrix.type }}.sh
+        shell: bash
+      - name: Print version
+        run: snyk --version
+        shell: bash
+  standalone:
+    name: Standalone
+    timeout-minutes: 5
+    strategy:
+      matrix:
+        os: ['macos-latest', 'ubuntu-latest', 'windows-latest']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install snyk
+        run: ./hooks/installation/install-standalone.sh
         shell: bash
       - name: Print version
         run: snyk --version

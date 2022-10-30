@@ -29,7 +29,6 @@ repos:
     rev: v0.8.0.4
     hooks:
       - id: shellcheck
-        exclude: ^mvnw$
   # Yaml
   - repo: https://github.com/adrienverge/yamllint
     rev: v1.28.0
