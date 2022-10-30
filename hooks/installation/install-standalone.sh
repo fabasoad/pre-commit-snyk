@@ -28,4 +28,3 @@ echo "GET https://static.snyk.io/cli/latest/$binary"
 
 curl https://static.snyk.io/cli/latest/$binary -o snyk
 chmod +x ./snyk
-PATH=$PATH:$(pwd)

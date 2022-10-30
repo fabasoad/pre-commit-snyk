@@ -60,7 +60,7 @@ jobs:
         run: ./hooks/installation/install-standalone.sh
         shell: bash
       - name: Print version
-        run: snyk --version
+        run: ./snyk --version
         shell: bash
   standalone-alpine:
     name: Standalone (alpine-latest)
@@ -77,5 +77,5 @@ jobs:
         run: ./hooks/installation/install-standalone.sh
         shell: bash
       - name: Print version
-        run: snyk --version
+        run: ./snyk --version
         shell: bash
