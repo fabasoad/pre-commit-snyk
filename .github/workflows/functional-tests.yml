@@ -7,7 +7,6 @@ on:
       - 'main'
       - 'fix-**'
       - 'feature-**'
-      - 'pre-commit-ci-update-config'
 
 jobs:
   package_manager:
