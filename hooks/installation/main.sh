@@ -10,7 +10,9 @@ then
     bash "${SCRIPT_DIR}"/install-scoop.sh
   elif command -v npm &> /dev/null; then
     bash "${SCRIPT_DIR}"/install-npm.sh
-  else
+  elif command -v yarn &> /dev/null; then
     bash "${SCRIPT_DIR}"/install-yarn.sh
+  else
+    bash "${SCRIPT_DIR}"/install-standalone.sh
   fi
 fi

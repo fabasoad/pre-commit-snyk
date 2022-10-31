@@ -11,11 +11,16 @@
 ## Description
 
 Take into account that in case `snyk` is not installed locally it will be
-automatically installed **globally**.
+automatically installed **globally**. Here is the order of the attempts for
+this tool to install `snyk`:
 
-To use any of these hooks **one of the following tools** have to be installed:
-[snyk](https://docs.snyk.io/snyk-cli/install-the-snyk-cli), [yarn](https://yarnpkg.com/cli/install),
-[npm](https://nodejs.org/en/download/), [brew](https://brew.sh/) or [scoop](https://scoop.sh/).
+- [brew](https://brew.sh/), hence it should be installed.
+- [scoop](https://scoop.sh/), hence it should be installed.
+- [npm](https://nodejs.org/en/download/), hence it should be installed.
+- [yarn](https://yarnpkg.com/cli/install), hence it should be installed.
+- Standalone installation, for this [curl](https://curl.se/) has to be installed.
+
+If none of the tools above are installed then installation process will fail.
 
 ## Documentation
 
