@@ -29,10 +29,8 @@ else
   esac
 fi
 
-prefix="[pre-commit-snyk]"
-
 url="https://static.snyk.io/cli/latest/$binary"
-printf "%s GET %s" "$prefix" "$url"
+echo "[pre-commit-snyk] GET $url"
 curl $url -o snyk
 chmod +x ./snyk
 mv ./snyk $path
