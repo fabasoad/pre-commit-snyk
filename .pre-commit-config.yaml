@@ -9,12 +9,12 @@ repos:
       - id: detect-secrets
         stages: ["commit", "push"]
   - repo: https://github.com/zricethezav/gitleaks
-    rev: v8.15.0
+    rev: v8.15.1
     hooks:
       - id: gitleaks
         stages: ["commit", "push"]
   - repo: https://github.com/gitguardian/ggshield
-    rev: v1.13.6
+    rev: v1.14.1
     hooks:
       - id: ggshield
         language_version: python3
