@@ -17,13 +17,13 @@ jobs:
         os: ['macos', 'ubuntu', 'windows']
         type: ['npm', 'yarn', 'brew', 'scoop']
         exclude:
-          - os: ubuntu-latest
+          - os: ubuntu
             type: brew
-          - os: windows-latest
+          - os: windows
             type: brew
-          - os: ubuntu-latest
+          - os: ubuntu
             type: scoop
-          - os: macos-latest
+          - os: macos
             type: scoop
     runs-on: ${{ matrix.os }}-latest
     steps:
