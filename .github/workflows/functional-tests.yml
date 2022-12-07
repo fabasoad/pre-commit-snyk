@@ -14,18 +14,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ['macos-latest', 'ubuntu-latest', 'windows-latest']
+        os: ['macos', 'ubuntu', 'windows']
         type: ['npm', 'yarn', 'brew', 'scoop']
         exclude:
-          - os: ubuntu-latest
+          - os: ubuntu
             type: brew
-          - os: windows-latest
+          - os: windows
             type: brew
-          - os: ubuntu-latest
+          - os: ubuntu
             type: scoop
-          - os: macos-latest
+          - os: macos
             type: scoop
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}-latest
     steps:
       - uses: actions/checkout@v3
       - name: Setup scoop
@@ -47,8 +47,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ['macos-latest', 'ubuntu-latest', 'windows-latest']
-    runs-on: ${{ matrix.os }}
+        os: ['macos', 'ubuntu', 'windows']
+    runs-on: ${{ matrix.os }}-latest
     steps:
       - uses: actions/checkout@v3
       - name: Install snyk
@@ -58,11 +58,15 @@ jobs:
         run: snyk --version
         shell: sh
   standalone-alpine:
-    name: Standalone (alpine-latest)
+    name: Standalone
     timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        image: ['alpine']
     runs-on: ubuntu-latest
     container:
-      image: alpine:latest
+      image: ${{ matrix.image }}:latest
     steps:
       - uses: actions/checkout@v3
       - name: Install tools
