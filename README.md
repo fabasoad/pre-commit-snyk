@@ -66,4 +66,5 @@ repos:
     rev: <rev>
     hooks:
       - id: snyk-test
+        args: ["--severity-threshold=critical"]
 ```
