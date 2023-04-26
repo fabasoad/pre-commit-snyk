@@ -20,16 +20,25 @@ repos:
     rev: v0.33.0
     hooks:
       - id: markdownlint-fix
+        stages: ["push"]
   # Shell
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.9.0.2
     hooks:
       - id: shellcheck
+        stages: ["push"]
   # Yaml
   - repo: https://github.com/adrienverge/yamllint
     rev: v1.31.0
     hooks:
       - id: yamllint
+        stages: ["push"]
+  # GitHub Actions
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.6.24
+    hooks:
+      - id: actionlint
+        stages: ["push"]
   # Other
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0
@@ -39,11 +48,9 @@ repos:
       - id: detect-private-key
         stages: ["commit", "push"]
       - id: end-of-file-fixer
-        stages: ["commit"]
       - id: mixed-line-ending
         args: ["--fix=lf"]
       - id: no-commit-to-branch
       - id: trailing-whitespace
-        stages: ["commit"]
 ci:
   autofix_prs: false
