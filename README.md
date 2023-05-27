@@ -2,8 +2,8 @@
 
 [![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://stand-with-ukraine.pp.ua)
 ![GitHub release](https://img.shields.io/github/v/release/fabasoad/pre-commit-snyk?include_prereleases)
-![Functional Tests](https://github.com/fabasoad/pre-commit-snyk/workflows/Functional%20Tests/badge.svg)
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/fabasoad/pre-commit-snyk/main.svg)](https://results.pre-commit.ci/latest/github/fabasoad/pre-commit-snyk/main)
+![functional-tests](https://github.com/fabasoad/pre-commit-snyk/actions/workflows/functional-tests.yml/badge.svg)
+![pre-commit](https://github.com/fabasoad/pre-commit-snyk/actions/workflows/pre-commit.yml/badge.svg)
 
 1. [snyk-container](#snyk-container)
 2. [snyk-iac](#snyk-iac)
@@ -26,6 +26,7 @@ If none of the tools above are installed then installation process will fail.
 ## Documentation
 
 <!-- markdownlint-disable-next-line MD013 -->
+
 > `<rev>` in the examples below, is the latest revision tag from [fabasoad/pre-commit-snyk](https://github.com/fabasoad/pre-commit-snyk/releases)
 > repository.
 
