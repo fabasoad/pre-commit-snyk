@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -eu
 
 if [[ -f "/etc/alpine-release" ]]; then
