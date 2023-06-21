@@ -24,7 +24,7 @@
 
 - id: snyk-log4shell
   name: Snyk log4shell
-  description: Runs 'snyk log4shell test' command
+  description: Runs 'snyk log4shell' command
   entry: hooks/snyk-log4shell.sh
   language: script
   pass_filenames: false
