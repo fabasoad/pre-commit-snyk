@@ -8,7 +8,8 @@
 1. [snyk-container](#snyk-container)
 2. [snyk-iac](#snyk-iac)
 3. [snyk-test](#snyk-test)
-4. [snyk-log4shell](#snyk-log4shell)
+4. [snyk-code](#snyk-code)
+5. [snyk-log4shell](#snyk-log4shell)
 
 ## Description
 
@@ -68,6 +69,17 @@ repos:
     rev: <rev>
     hooks:
       - id: snyk-test
+        args: ["--severity-threshold=critical"]
+```
+
+### snyk-code
+
+```yaml
+repos:
+  - repo: https://github.com/fabasoad/pre-commit-snyk
+    rev: <rev>
+    hooks:
+      - id: snyk-code
         args: ["--severity-threshold=critical"]
 ```
 
