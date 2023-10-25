@@ -53,13 +53,17 @@ repos:
     rev: <rev>
     hooks:
       - id: snyk-iac
-        args:
-          - <folder>
+        args:["<folder>","--severity-threshold=<severity-level>"]
 ```
 
 Where:
 
 - `<folder>` is the folder path that you want to test.
+- `<severity-level>` only vulnerabilities of the specified level or higher are reported. Options are:
+    - low
+    - medium
+    - high
+    - critical
 
 ### snyk-test
 
