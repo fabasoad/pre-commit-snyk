@@ -4,3 +4,4 @@
 !.vscode/settings.json
 .envrc
 .idea
+.dccache
