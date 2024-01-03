@@ -8,7 +8,7 @@ on: # yamllint disable-line rule:truthy
   pull_request:
 
 jobs:
-  package_manager:
+  package-manager:
     name: Package manager
     timeout-minutes: 5
     strategy:
