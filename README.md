@@ -57,6 +57,7 @@ repos:
         args:["<folder>","--severity-threshold=<severity-level>"]
 	verbose: true
 ```
+> `verbose` is optional. It is used to show why the snyk-iac test has passed/failed in more detail.
 
 Where:
 
