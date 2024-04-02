@@ -54,10 +54,10 @@ repos:
     rev: <rev>
     hooks:
       - id: snyk-iac
-        args:["<folder>","--severity-threshold=<severity-level>"]
+        args:["<folder>","--severity-threshold=<severity-level>"]	
 	verbose: true
 ```
-> `verbose` is optional. It is used to show why the snyk-iac test has passed/failed in more detail.
+> `verbose` is optional. In this example it is used to show why the snyk-iac test has passed/failed in more detail.
 
 Where:
 
