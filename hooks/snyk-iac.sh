@@ -5,7 +5,6 @@ bash "${SCRIPT_DIR}"/installation/main.sh
 
 # Check for the presence of IaC files
 if ! ls *.tf *.yaml *.yml &> /dev/null; then
-  echo "Warning: No IaC files detected. Skipping Snyk IaC test."
-else
   snyk iac test "$@"
-fi
+else
+  echo "Warning: No code files detected. Skipping Snyk code test."
