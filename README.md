@@ -55,6 +55,7 @@ repos:
     hooks:
       - id: snyk-iac
         args:["<folder>","--severity-threshold=<severity-level>"]
+	verbose: true
 ```
 
 Where:
@@ -78,6 +79,7 @@ repos:
     hooks:
       - id: snyk-test
         args: ["--severity-threshold=critical"]
+	verbose: true
 ```
 
 ### snyk-code
@@ -89,6 +91,7 @@ repos:
     hooks:
       - id: snyk-code
         args: ["--severity-threshold=critical"]
+	verbose: true
 ```
 
 ### snyk-log4shell
