@@ -8,4 +8,5 @@ if find . \( -name '*.tf' -o -name '*.hcl' -o -name '*.yml' -o -name '*.yaml' -o
   snyk iac test "$@"
 else
   echo "Warning: No supported infrastructure as code files detected. Skipping Snyk IaC test."
+  exit 0  # Return success status
 fi
