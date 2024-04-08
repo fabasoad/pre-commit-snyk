@@ -14,6 +14,7 @@ if [ "$snyk_exit_code" = 2 ]; then
   exit 0
 fi
 
+# Check if the exit code is 3
 if [ "$snyk_exit_code" = 3 ]; then
   echo "Valid files not found."
   exit 0
