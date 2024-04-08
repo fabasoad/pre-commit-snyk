@@ -10,7 +10,7 @@ set -e
 
 # Check if the exit code is 2
 if [ "$snyk_exit_code" = 2 ]; then
-  echo "Error, try running manually, use -d to output debug logs"
+  echo "Error, try running manually, use -d to output debug logs."
   exit 0
 fi
 
