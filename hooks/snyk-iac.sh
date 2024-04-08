@@ -6,12 +6,14 @@ SCRIPT_DIR="$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)"
 
 bash "${SCRIPT_DIR}"/installation/main.sh
 
+snyk iac test
+snyk_exit_code=$?
+
 set +e
-snyk_exit_code=$(snyk iac test)
-if [ "$snyk_exit_code" = 3 ]; then
-  echo "No vulnerabilities found"
+if [ "$snyk_exist_code" = 2 ] || [ "$snyk_exist_code" = 3 ]; then
+  echo "No supported projects detected"
   exit 0
 else
-  echo "Vulnerabilities found"
-  exit "$snyk_exit_code"
+  snyk code test "$@"
 fi
+set -e
