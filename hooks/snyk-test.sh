@@ -10,7 +10,7 @@ snyk test
 snyk_exit_code=$?
 
 set +e
-if [ "$snyk_exist_code" = 2 ] || [ "$snyk_exist_code" = 3 ]; then
+if [ "$snyk_exit_code" = 2 ] || [ "$snyk_exit_code" = 3 ]; then
   echo "No supported projects detected"
   exit 0
 else
