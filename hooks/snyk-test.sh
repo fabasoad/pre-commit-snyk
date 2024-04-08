@@ -4,11 +4,16 @@ set -eu
 
 SCRIPT_DIR="$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)"
 
-bash "${SCRIPT_DIR}"/installation/main.sh
 
-# Check for the presence of dependency files
-if find . \( -name 'package.json' -o -name 'package-lock.json' -o -name 'yarn.lock' -o -name 'Gemfile' -o -name 'Gemfile.lock' -o -name 'requirements.txt' -o -name 'Pipfile' -o -name 'Pipfile.lock' -o -name 'composer.json' -o -name 'composer.lock' \) -print -quit; then
-  snyk test "$@"
+bash "${SCRIPT_DIR}"/installation/main.sh
+# Temporarily turning off the `-e` option
+set +e
+snyk_exist_code=$(snyk test ...)
+if [ "$snyk_exist_code" = 3 ]; then
+  echo "No supported projects detected"
+  exit 0
 else
-  echo "Warning: No supported dependency files detected. Skipping Snyk dependency test."
+  snyk test "$@"
 fi
+set -e
+exit "$snyk_exist_code"
