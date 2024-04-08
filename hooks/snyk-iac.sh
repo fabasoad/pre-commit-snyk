@@ -8,7 +8,7 @@ bash "${SCRIPT_DIR}"/installation/main.sh
 
 set +e
 snyk_exit_code=$(snyk iac test)
-if [ "$snyk_exit_code" = 0 ]; then
+if [ "$snyk_exit_code" = 3 ]; then
   echo "No vulnerabilities found"
   exit 0
 else
