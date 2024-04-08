@@ -16,3 +16,4 @@ else
 fi
 set -e
 exit "$snyk_exist_code"
+echo "$snyk_exist_code"
