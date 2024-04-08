@@ -8,7 +8,7 @@ bash "${SCRIPT_DIR}"/installation/main.sh
 
 snyk test "$@"
 snyk_exit_code=$?
-"$snyk_exit_code"
+echo "$snyk_exit_code"
 
 #set +e
 if [ "$snyk_exit_code" = 2 ] || [ "$snyk_exit_code" = 3 ]; then
