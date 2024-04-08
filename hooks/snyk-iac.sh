@@ -13,7 +13,5 @@ set +e
 if [ "$snyk_exit_code" = 2 ] || [ "$snyk_exit_code" = 3 ]; then
   echo "No supported projects detected"
   exit 0
-else
-  snyk code test "$@"
 fi
 set -e
