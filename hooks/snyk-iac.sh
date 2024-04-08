@@ -2,17 +2,17 @@
 
 set -eu
 
-SCRIPT_DIR="$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)"
-
-bash "${SCRIPT_DIR}"/installation/main.sh
-
-snyk iac test "$@"
+# Capture exit code of Snyk Test hook
+set +e
+snyk iac test
 snyk_exit_code=$?
-echo "$snyk_exit_code"
+set -e
 
-#set +e
+# Check if the exit code is 2
 if [ "$snyk_exit_code" = 2 ] || [ "$snyk_exit_code" = 3 ]; then
-  echo "No supported projects detected"
+  echo "Valid files not found."
   exit 0
 fi
-#set -e
+
+# If the exit code is not 2, exit with the same code
+exit "$snyk_exit_code"
