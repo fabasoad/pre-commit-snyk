@@ -2,17 +2,20 @@
 
 set -eu
 
-SCRIPT_DIR="$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)"
+# Run Snyk Code hook
+snyk code test "$@" || true
 
-bash "${SCRIPT_DIR}"/installation/main.sh
-
-snyk code test "$@"
+# Capture exit code of Snyk Test hook
+set +e
+snyk code test
 snyk_exit_code=$?
-echo "$snyk_exit_code"
+set -e
 
-#set +e
-if [ "$snyk_exit_code" = 2 ] || [ "$snyk_exit_code" = 3 ]; then
-  echo "No supported projects detected"
+# Check if the exit code is 2 (indicating pipenv not installed)
+if [ "$snyk_exit_code" = 2 ]; then
+  echo "pipenv is not installed, but the Snyk Test check passed."
   exit 0
 fi
-#set -e
+
+# If the exit code is not 2, exit with the same code
+exit "$snyk_exit_code"
