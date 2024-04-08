@@ -15,4 +15,3 @@ else
   snyk test "$@"
 fi
 set -e
-echo "$snyk_exist_code"
