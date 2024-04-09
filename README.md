@@ -55,9 +55,7 @@ repos:
     hooks:
       - id: snyk-iac
         args:["<folder>","--severity-threshold=<severity-level>"]	
-	verbose: true
 ```
-> `verbose` is optional. In this example it is used to show why the snyk-iac test has passed/failed in more detail.
 
 Where:
 
@@ -80,7 +78,6 @@ repos:
     hooks:
       - id: snyk-test
         args: ["--severity-threshold=critical"]
-	verbose: true
 ```
 
 ### snyk-code
@@ -92,7 +89,6 @@ repos:
     hooks:
       - id: snyk-code
         args: ["--severity-threshold=critical"]
-	verbose: true
 ```
 
 ### snyk-log4shell
