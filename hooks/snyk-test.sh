@@ -1,6 +1,10 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 set -eu
-SCRIPT_DIR="$(cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd)"
-sh "${SCRIPT_DIR}/installation/main.sh"
+
+SCRIPT_PATH=$(realpath "$0")
+HOOKS_FOLDER_PATH=$(dirname "${SCRIPT_PATH}")
+INSTALLATION_FOLDER_PATH="${HOOKS_FOLDER_PATH}/installation"
+
+sh "${INSTALLATION_FOLDER_PATH}/main.sh"
 
 snyk test "$@"
