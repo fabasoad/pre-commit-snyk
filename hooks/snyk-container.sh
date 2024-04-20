@@ -37,7 +37,6 @@ container_rmi() {
 snyk_args=()
 dockerfiles=()
 for arg in "$@"; do
-  echo ">> $arg"
   if [ "${arg#-}" != "$arg" ]; then
     snyk_args+=("$arg")
   else
