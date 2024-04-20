@@ -38,10 +38,10 @@ snyk_args=()
 dockerfiles=()
 for arg in "$@"; do
   echo ">> $arg"
-  if [[ $arg == *Dockerfile ]]; then
-    dockerfiles+=("$arg")
-  else
+  if [ "${arg#-}" != "$arg" ]; then
     snyk_args+=("$arg")
+  else
+    dockerfiles+=("$arg")
   fi
 done
 
