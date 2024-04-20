@@ -54,7 +54,7 @@ for file_path in "${dockerfiles[@]}"; do
     echo ""
   fi
   printf "%s Building %s from %s\n\n" "$prefix" "$image" "$file_path"
-  container_build "$image" "$(echo "$file_path" | rev | cut -d'/' -f2- | rev)"
+  container_build "$image" "$file_path"
   printf "\n%s Testing %s\n" "$prefix" "$image"
   snyk container test "$image" "--file=$file_path" "${snyk_args[*]}"
   printf "\n%s Removing %s" "$prefix" "$image"
