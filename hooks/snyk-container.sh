@@ -13,9 +13,9 @@ container_build() {
   tag="$1"
   path="$2"
   if command -v docker &> /dev/null; then
-    docker build -t "$tag" "$path"
+    docker build -t "$tag" -f "$path" .
   elif command -v podman &> /dev/null; then
-    podman build -t "$tag" "$path"
+    podman build -t "$tag" -f "$path" .
   else
     echo "$prefix docker or podman are not found. Please install one of these tools and try again"
     exit 1
