@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 set -eu
 
-if [[ -f "/etc/alpine-release" ]]; then
+if [ -f "/etc/alpine-release" ]; then
   binary="snyk-alpine"
   path="/usr/local/bin/"
 else
@@ -19,7 +19,7 @@ else
       path="C:\Windows\System32"
       ;;
     *)
-      if [[ "$(uname -m)" == "arm64" ]]; then
+      if [ "$(uname -m)" = "arm64" ]; then
         binary="snyk-linux-arm64"
       else
         binary="snyk-linux"
@@ -31,6 +31,6 @@ fi
 
 url="https://static.snyk.io/cli/latest/$binary"
 echo "[pre-commit-snyk] GET $url"
-curl $url -o snyk
+curl "$url" -o snyk
 chmod +x ./snyk
-mv ./snyk $path
+mv ./snyk "$path"
