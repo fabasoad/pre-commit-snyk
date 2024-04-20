@@ -13,9 +13,9 @@ container_build() {
   tag="$1"
   path="$2"
   if command -v docker &> /dev/null; then
-    docker build -t "$tag" "$path"
+    docker build -t "$tag" -f "$path" .
   elif command -v podman &> /dev/null; then
-    podman build -t "$tag" "$path"
+    podman build -t "$tag" -f "$path" .
   else
     echo "$prefix docker or podman are not found. Please install one of these tools and try again"
     exit 1
@@ -37,10 +37,10 @@ container_rmi() {
 snyk_args=()
 dockerfiles=()
 for arg in "$@"; do
-  if [[ $arg == *Dockerfile ]]; then
-    dockerfiles+=("$arg")
-  else
+  if [ "${arg#-}" != "$arg" ]; then
     snyk_args+=("$arg")
+  else
+    dockerfiles+=("$arg")
   fi
 done
 
@@ -53,7 +53,7 @@ for file_path in "${dockerfiles[@]}"; do
     echo ""
   fi
   printf "%s Building %s from %s\n\n" "$prefix" "$image" "$file_path"
-  container_build "$image" "$(echo "$file_path" | rev | cut -d'/' -f2- | rev)"
+  container_build "$image" "$file_path"
   printf "\n%s Testing %s\n" "$prefix" "$image"
   snyk container test "$image" "--file=$file_path" "${snyk_args[*]}"
   printf "\n%s Removing %s" "$prefix" "$image"
