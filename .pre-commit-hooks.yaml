@@ -38,5 +38,4 @@
   entry: hooks/snyk-log4shell.sh
   language: script
   pass_filenames: false
-  pass_filenames: false
   verbose: true
