@@ -2,10 +2,14 @@
 name: Functional Tests
 
 on: # yamllint disable-line rule:truthy
+  pull_request: {}
   push:
     branches:
       - "main"
-  pull_request:
+
+defaults:
+  run:
+    shell: sh
 
 jobs:
   package-manager:
@@ -27,9 +31,10 @@ jobs:
             type: scoop
     runs-on: ${{ matrix.os }}-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout ${{ github.repository }}
+        uses: actions/checkout@v4
       - name: Setup scoop
-        if: ${{ runner.os == 'Windows' && matrix.type == 'scoop' }}
+        if: ${{ matrix.type == 'scoop' }}
         uses: MinoruSekine/setup-scoop@main
       - name: Configure yarn
         if: ${{ runner.os == 'Windows' && matrix.type == 'yarn' }}
@@ -37,10 +42,8 @@ jobs:
         shell: pwsh
       - name: Install snyk
         run: ./hooks/installation/install-${{ matrix.type }}.sh
-        shell: bash
       - name: Print version
         run: snyk --version
-        shell: sh
   standalone:
     name: Standalone
     timeout-minutes: 5
@@ -50,13 +53,12 @@ jobs:
         os: ["macos", "ubuntu", "windows"]
     runs-on: ${{ matrix.os }}-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout ${{ github.repository }}
+        uses: actions/checkout@v4
       - name: Install snyk
         run: ./hooks/installation/install-standalone.sh
-        shell: bash
       - name: Print version
         run: snyk --version
-        shell: sh
   standalone-alpine:
     name: Standalone
     timeout-minutes: 5
@@ -68,13 +70,11 @@ jobs:
     container:
       image: ${{ matrix.image }}:latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout ${{ github.repository }}
+        uses: actions/checkout@v4
       - name: Install tools
-        run: apk add bash curl
-        shell: sh
+        run: apk add curl
       - name: Install snyk
         run: ./hooks/installation/install-standalone.sh
-        shell: bash
       - name: Print version
         run: snyk --version
-        shell: sh
