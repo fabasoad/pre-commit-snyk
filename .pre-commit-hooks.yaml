@@ -14,6 +14,7 @@
   entry: hooks/snyk-iac.sh
   language: script
   pass_filenames: false
+  verbose: true
 
 - id: snyk-test
   name: Snyk Test
@@ -21,6 +22,7 @@
   entry: hooks/snyk-test.sh
   language: script
   pass_filenames: false
+  verbose: true
 
 - id: snyk-code
   name: Snyk Code
@@ -28,6 +30,7 @@
   entry: hooks/snyk-code.sh
   language: script
   pass_filenames: false
+  verbose: true
 
 - id: snyk-log4shell
   name: Snyk log4shell
@@ -35,3 +38,4 @@
   entry: hooks/snyk-log4shell.sh
   language: script
   pass_filenames: false
+  verbose: true
