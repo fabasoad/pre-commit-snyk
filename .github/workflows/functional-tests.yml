@@ -35,7 +35,10 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup scoop
         if: ${{ matrix.type == 'scoop' }}
-        uses: MinoruSekine/setup-scoop@main
+        run: |
+          Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+          Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+        shell: pwsh
       - name: Configure yarn
         if: ${{ runner.os == 'Windows' && matrix.type == 'yarn' }}
         run: yarn global bin | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
