@@ -18,38 +18,24 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ["windows"]
-        #        os: ["macos", "ubuntu", "windows"]
-        type: ["scoop"]
-    #        type: ["npm", "yarn", "brew", "scoop"]
-    #        exclude:
-    #          - os: ubuntu
-    #            type: brew
-    #          - os: windows
-    #            type: brew
-    #          - os: ubuntu
-    #            type: scoop
-    #          - os: macos
-    #            type: scoop
+        os: ["macos", "ubuntu", "windows"]
+        type: ["npm", "yarn", "brew", "scoop"]
+        exclude:
+          - os: ubuntu
+            type: brew
+          - os: windows
+            type: brew
+          - os: ubuntu
+            type: scoop
+          - os: macos
+            type: scoop
     runs-on: ${{ matrix.os }}-latest
     steps:
       - name: Checkout ${{ github.repository }}
         uses: actions/checkout@v4
-      - name: Print PATH
-        run: echo $PATH
       - name: Setup scoop
         if: ${{ matrix.type == 'scoop' }}
-        run: |
-          Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-          iwr -useb get.scoop.sh | iex
-        #          echo "%USERPROFILE%" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-        shell: pwsh
-      #      - name: Print env
-      #        run: |
-      #          echo $PATH
-      #          echo "---"
-      #          echo "$USERPROFILE"
-      #          ls -la "$USERPROFILE"
+        uses: MinoruSekine/setup-scoop@v4
       - name: Configure yarn
         if: ${{ runner.os == 'Windows' && matrix.type == 'yarn' }}
         run: yarn global bin | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
