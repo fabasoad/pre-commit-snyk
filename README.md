@@ -54,7 +54,7 @@ repos:
     rev: <rev>
     hooks:
       - id: snyk-iac
-        args:["<folder>","--severity-threshold=<severity-level>"]
+        args: ["<dir>", "--severity-threshold=<severity-level>"]
 ```
 
 Where:
