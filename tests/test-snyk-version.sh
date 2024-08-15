@@ -59,9 +59,9 @@ test_snyk_version_env_var() {
 
 main() {
   echo "Testing $(basename "$0")..."
-  test_snyk_version_param_precedence "snyk-test" "0.79.2" "0.79.3" "0.79.2"
-  test_snyk_version_param_precedence "snyk-test" "0.79.3" "0.79.2" "0.79.3"
-  test_snyk_version_env_var "snyk-test" "0.79.2"
+  test_snyk_version_param_precedence "snyk-test" "1.1291.1" "1.1291.2" "1.1291.1"
+  test_snyk_version_param_precedence "snyk-test" "1.1291.2" "1.1291.1" "1.1291.2"
+  test_snyk_version_env_var "snyk-test" "1.1291.1"
   echo "[PASS] Total 3 tests passed\n"
 }
 
