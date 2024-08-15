@@ -4,7 +4,7 @@ set -u
 snyk_common() {
   # Removing trailing space (sed command) is needed here in case there were no
   # --snyk-args passed, so for example, $1 in this case is "test "
-  snyk_args="$(echo "$1" | sed 's/ *$//') --all-projects --exclude=**/${CONFIG_TEMP_DIR_NAME}"
+  snyk_args="$(echo "$1" | sed 's/ *$//')"
 
   snyk_path=$(install)
   snyk_version=$(${snyk_path} --version | cut -d ' ' -f 2)
