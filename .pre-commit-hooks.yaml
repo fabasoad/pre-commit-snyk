@@ -1,8 +1,16 @@
 ---
+- id: snyk-code
+  name: Snyk Code
+  description: Runs 'snyk code test' command
+  entry: src/main.sh "snyk-code"
+  language: script
+  pass_filenames: false
+  verbose: true
+
 - id: snyk-container
   name: Snyk Container
   description: Runs 'snyk container test' command
-  entry: hooks/snyk-container.sh
+  entry: src/main.sh "snyk-container"
   language: script
   pass_filenames: true
   files: Dockerfile
@@ -11,23 +19,7 @@
 - id: snyk-iac
   name: Snyk IaC
   description: Runs 'snyk iac test' command
-  entry: hooks/snyk-iac.sh
-  language: script
-  pass_filenames: false
-  verbose: true
-
-- id: snyk-test
-  name: Snyk Test
-  description: Runs 'snyk test' command
-  entry: hooks/snyk-test.sh
-  language: script
-  pass_filenames: false
-  verbose: true
-
-- id: snyk-code
-  name: Snyk Code
-  description: Runs 'snyk code test' command
-  entry: hooks/snyk-code.sh
+  entry: src/main.sh "snyk-iac"
   language: script
   pass_filenames: false
   verbose: true
@@ -35,7 +27,15 @@
 - id: snyk-log4shell
   name: Snyk log4shell
   description: Runs 'snyk log4shell' command
-  entry: hooks/snyk-log4shell.sh
+  entry: src/main.sh "snyk-log4shell"
+  language: script
+  pass_filenames: false
+  verbose: true
+
+- id: snyk-test
+  name: Snyk Test
+  description: Runs 'snyk test' command
+  entry: src/main.sh "snyk-test"
   language: script
   pass_filenames: false
   verbose: true
