@@ -29,9 +29,9 @@
 
 ## How it works?
 
-At first hook tries to use globally installed `snyk` CLI. And if it doesn't exist
-then hook installs `snyk` into a `.pre-commit-snyk` temporary directory that
-will be removed after scanning is completed.
+At first hook tries to use globally installed `snyk` tool. And if it doesn't exist
+then hook installs `snyk` into a `.fabasoad/pre-commit-snyk` temporary directory
+that will be removed after scanning is completed.
 
 ## Prerequisites
 
@@ -251,11 +251,11 @@ globally installed, otherwise globally installed `snyk` takes precedence.
 
 ##### Clean cache
 
-With this parameter you can choose either to keep cache directory, or to remove
-it. By default, it removes cache directory. With `false` parameter cache directory
-will not be removed which means that if `snyk` is not installed globally every
-subsequent run won't download `snyk` again. Don't forget to add cache directory
-into the `.gitignore` file.
+With this parameter you can choose either to keep cache directory (`.fabasoad/pre-commit-snyk`),
+or to remove it. By default, it removes cache directory. With `false` parameter
+cache directory will not be removed which means that if `snyk` is not installed
+globally every subsequent run won't download `snyk` again. Don't forget to add
+cache directory into the `.gitignore` file.
 
 - Parameter name: `--clean-cache`
 - Environment variable: `PRE_COMMIT_SNYK_CLEAN_CACHE`

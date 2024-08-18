@@ -22,9 +22,9 @@ snyk_common() {
   if [ "${snyk_exit_code}" = "0" ]; then
     fabasoad_log "info" "${msg}"
   else
-    fabasoad_log "warning" "${msg}"
+    fabasoad_log "error" "${msg}"
   fi
 
-  uninstall "${CONFIG_TEMP_DIR}"
+  uninstall
   exit ${snyk_exit_code}
 }

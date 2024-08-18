@@ -43,10 +43,17 @@ install() {
     snyk_path="$(which snyk)"
     fabasoad_log "debug" "Snyk is found at ${snyk_path}. Installation skipped"
   else
-    snyk_path="${CONFIG_TEMP_BIN_DIR}/snyk"
-    mkdir -p "${CONFIG_TEMP_BIN_DIR}"
-    if [ ! -d "${CONFIG_TEMP_BIN_DIR}" ] || [ ! -f "${snyk_path}" ]; then
-      fabasoad_log "debug" "Snyk is not found. Downloading ${PRE_COMMIT_SNYK_SNYK_VERSION} version:"
+    if [ -f "${CONFIG_CACHE_APP_BIN_DIR}" ]; then
+      err_msg="${CONFIG_CACHE_APP_BIN_DIR} existing file prevents from creating"
+      err_msg="${err_msg} a cache directory with the same name. Please either"
+      err_msg="${err_msg} remove this file or install snyk globally manually."
+      fabasoad_log "error" "${err_msg}"
+      exit 1
+    fi
+    snyk_path="${CONFIG_CACHE_APP_BIN_DIR}/snyk"
+    mkdir -p "${CONFIG_CACHE_APP_BIN_DIR}"
+    if [ ! -f "${snyk_path}" ]; then
+      fabasoad_log "debug" "Snyk is not found. Downloading ${PRE_COMMIT_SNYK_SNYK_VERSION} version..."
       _download "${snyk_path}" "${PRE_COMMIT_SNYK_SNYK_VERSION}"
       fabasoad_log "debug" "Downloading completed"
     else
