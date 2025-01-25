@@ -9,7 +9,7 @@ main() {
   mkdir -p "${bpkg_packages_dir}"
   lock_file="${ROOT_DIR}/.bpkg.lock"
   while IFS= read -r line; do
-    PREFIX="${bpkg_packages_dir}" bpkg install "$line"
+    PREFIX="${bpkg_packages_dir}" bpkg install "${line}"
   done < "${lock_file}"
 }
 

@@ -5,10 +5,10 @@ ROOT_DIR=$(dirname "${TESTS_DIR}")
 SRC_DIR="${ROOT_DIR}/src"
 
 test_log_level_param_precedence() {
-  command="$1"
-  log_level_cmd="$2"
-  log_level_env_var="$3"
-  debug_expected="$4"
+  command="${1}"
+  log_level_cmd="${2}"
+  log_level_env_var="${3}"
+  debug_expected="${4}"
 
   test_name="${FUNCNAME:-${0##*/}}: $@"
 
@@ -32,9 +32,9 @@ test_log_level_param_precedence() {
 }
 
 test_log_level_env_var() {
-  command="$1"
-  log_level_env_var="$2"
-  debug_expected="$3"
+  command="${1}"
+  log_level_env_var="${2}"
+  debug_expected="${3}"
 
   test_name="${FUNCNAME:-${0##*/}}: $@"
 

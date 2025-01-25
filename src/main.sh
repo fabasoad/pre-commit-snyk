@@ -13,8 +13,15 @@ _import_all() {
   done
 }
 
+# Validate that all needed dependencies are installed on the machine
+_validate_prerequisites() {
+  validate_tool_installed "jq"
+  validate_tool_installed "curl"
+}
+
 main() {
   _import_all
+  _validate_prerequisites
 
   cmd_snyk_code="snyk-code"
   cmd_snyk_container="snyk-container"
@@ -22,7 +29,7 @@ main() {
   cmd_snyk_log4shell="snyk-log4shell"
   cmd_snyk_test="snyk-test"
 
-  cmd_actual="$1"
+  cmd_actual="${1}"
   shift
 
   declare -A all_args_map
@@ -60,7 +67,7 @@ main() {
       snyk_test "${all_args_map["snyk-args"]}"
       ;;
     *)
-      validate_enum "hook" "${cmd_actual}" "${cmd_snyk_code},${cmd_snyk_container},${cmd_snyk_iac},${cmd_snyk_log4shell},${cmd_snyk_test}"
+      validate_enum "${cmd_actual}" "${cmd_snyk_code},${cmd_snyk_container},${cmd_snyk_iac},${cmd_snyk_log4shell},${cmd_snyk_test}"
       ;;
   esac
 }

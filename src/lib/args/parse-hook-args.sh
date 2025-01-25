@@ -4,7 +4,7 @@ parse_hook_args() {
   local -n args_map_ref=$1
   shift
 
-  args_str="$1"
+  args_str="${1}"
   if [ -n "${args_str}" ]; then
     orig_str="${args_str}"
     while [ ${#args_str} -gt 0 ]; do

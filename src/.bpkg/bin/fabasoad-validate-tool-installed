@@ -10,30 +10,30 @@ _fail() {
   exit "${exit_code}"
 }
 
-# Validates that passed value is a path to an existing file.
+# Validates that tool is installed on the machine.
 # Parameters:
 # 1. (Required) Param value that will be validated.
 # 2. (Optional) Param name to display it correctly in the error message for the
 #    users.
 #
 # Usage example:
-# fabasoad_validate_file_exists "/usr/local/project/requirements.txt" "my-file-param"
-# fabasoad_validate_file_exists "./proj/go.mod"
-fabasoad_validate_file_exists() {
-  if [ ! -f "${1}" ]; then
+# fabasoad_validate_tool_installed "jq" "my-jq-tool"
+# fabasoad_validate_tool_installed "curl"
+fabasoad_validate_tool_installed() {
+  if ! command -v "${1}" &> /dev/null; then
     msg=""
     if [ -n "${2:-""}" ]; then
       msg="${msg}\"${2}\" parameter is invalid. "
     fi
-    printf "%s\"%s\" is not a file or does not exist.\n" "${msg}" "${1}" >&2
+    printf "%s\"%s\" is not installed on the current machine.\n" "${msg}" "${1}" >&2
     _fail
   fi
 }
 
-## export
+# export
 if [[ ${BASH_SOURCE[0]} != $0 ]]; then
-  export -f fabasoad_validate_file_exists
+  export -f fabasoad_validate_tool_installed
 else
-  fabasoad_validate_file_exists "${@}"
+  fabasoad_validate_tool_installed "${@}"
   exit $?
 fi

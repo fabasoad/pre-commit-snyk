@@ -1,9 +1,9 @@
-.PHONY: build clean test
+.PHONY: install clean test
 
-.DEFAULT_GOAL := build
+.DEFAULT_GOAL := install
 
-build: clean
-	@./scripts/build.sh
+install: clean
+	@./scripts/install.sh
 
 clean:
 	@./scripts/clean.sh
