@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-_download() {
+download_snyk() {
   target_path="${1}"
   version="${2}"
 
@@ -52,12 +52,12 @@ install() {
     fi
     snyk_path="${CONFIG_CACHE_APP_BIN_DIR}/snyk"
     mkdir -p "${CONFIG_CACHE_APP_BIN_DIR}"
-    if [ ! -f "${snyk_path}" ]; then
-      fabasoad_log "debug" "Snyk is not found. Downloading ${PRE_COMMIT_SNYK_SNYK_VERSION} version..."
-      _download "${snyk_path}" "${PRE_COMMIT_SNYK_SNYK_VERSION}"
-      fabasoad_log "debug" "Downloading completed"
-    else
+    if [ -f "${snyk_path}" ]; then
       fabasoad_log "debug" "Snyk is found at ${snyk_path}. Installation skipped"
+    else
+      fabasoad_log "debug" "Snyk is not found. Downloading ${PRE_COMMIT_SNYK_SNYK_VERSION} version..."
+      download_snyk "${snyk_path}" "${PRE_COMMIT_SNYK_SNYK_VERSION}"
+      fabasoad_log "debug" "Downloading completed"
     fi
   fi
   echo "${snyk_path}"

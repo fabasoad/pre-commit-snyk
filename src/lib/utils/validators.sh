@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 _run_validator() {
-  func_name="$1"
+  func_name="${1}"
   shift
 
   set +e
@@ -20,4 +20,8 @@ validate_enum() {
 
 validate_semver() {
   _run_validator "fabasoad_validate_semver" "$@"
+}
+
+validate_tool_installed() {
+  _run_validator "fabasoad_validate_tool_installed" "$@"
 }

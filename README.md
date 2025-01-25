@@ -35,11 +35,12 @@ that will be removed after scanning is completed.
 
 ## Prerequisites
 
-The following tools have to be available on a runner prior using this pre-commit
+The following tools have to be available on a machine prior using this pre-commit
 hook:
 
 - [bash >=4.0](https://www.gnu.org/software/bash/)
 - [curl](https://curl.se/)
+- [jq](https://jqlang.github.io/jq/)
 
 ## Hooks
 
@@ -290,3 +291,7 @@ repos:
           - --hook-args=--log-level debug
           - --snyk-args=--detection-depth=1 --ignore-policy
 ```
+
+## Contributions
+
+![Alt](https://repobeats.axiom.co/api/embed/7ce583138987e93d1295be43056e647a1d2ede8e.svg "Repobeats analytics image")
