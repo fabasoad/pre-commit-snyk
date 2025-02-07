@@ -17,6 +17,7 @@ _import_all() {
 _validate_prerequisites() {
   validate_tool_installed "jq"
   validate_tool_installed "curl"
+  validate_bash_version
 }
 
 main() {
