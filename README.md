@@ -250,7 +250,7 @@ globally installed, otherwise globally installed `snyk` takes precedence.
 
 - Parameter name: `--snyk-version`
 - Environment variable: `PRE_COMMIT_SNYK_SNYK_VERSION`
-- Possible values: Snyk version that you can find [here](https://github.com/snyk/cli/releases)
+- Possible values: [Snyk version](https://github.com/snyk/cli/releases)
 - Default: `latest`
 
 ##### Clean cache
