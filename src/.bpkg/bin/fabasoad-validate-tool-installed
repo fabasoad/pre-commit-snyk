@@ -12,7 +12,7 @@ _fail() {
 
 # Validates that tool is installed on the machine.
 # Parameters:
-# 1. (Required) Param value that will be validated.
+# 1. (Required) Tool name.
 # 2. (Optional) Param name to display it correctly in the error message for the
 #    users.
 #
