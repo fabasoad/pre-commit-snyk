@@ -1,21 +1,21 @@
 ---
 default_install_hook_types: ["pre-commit", "pre-push"]
 default_stages: ["pre-commit", "pre-push"]
-minimum_pre_commit_version: 4.0.0
+minimum_pre_commit_version: 4.4.0
 repos:
   - repo: local
     hooks:
       - id: build
         name: Build
         entry: make install
-        language: system
+        language: unsupported
         pass_filenames: false
         verbose: true
         stages: ["pre-push"]
       - id: test
         name: Functional tests
         entry: make test
-        language: system
+        language: unsupported
         pass_filenames: false
         verbose: true
         stages: ["pre-push"]
@@ -26,7 +26,7 @@ repos:
         types: [text]
         args: []
         # https://github.com/prettier/prettier/releases
-        additional_dependencies: ["prettier@3.7.1"]
+        additional_dependencies: ["prettier@3.7.3"]
         stages: ["pre-commit"]
   # Security
   - repo: https://github.com/Yelp/detect-secrets
