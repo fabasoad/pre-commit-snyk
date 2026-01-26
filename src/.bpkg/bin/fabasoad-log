@@ -60,7 +60,7 @@ _fabasoad_log_init() {
 _fabasoad_wrap_text_with_color() {
   log_line="${1}"
   level="${2}"
-  if [ "${FABASOAD_LOG_CONFIG_TEXT_COLOR}" = "true" ]; then
+  if [ "${FABASOAD_LOG_CONFIG_TEXT_COLOR:-${FABASOAD_LOG_CONFIG_TEXT_COLOR_DEFAULT}}" = "true" ]; then
     if [ "${level}" = "error" ]; then
       printf "\033[91m${log_line}\033[0m"
     elif [ "${level}" = "warning" ]; then
@@ -76,7 +76,7 @@ _fabasoad_wrap_text_with_color() {
 }
 
 _fabasoad_wrap_text_with_bold() {
-  if [ "${FABASOAD_LOG_CONFIG_TEXT_COLOR}" = "true" ]; then
+  if [ "${FABASOAD_LOG_CONFIG_TEXT_COLOR:-${FABASOAD_LOG_CONFIG_TEXT_COLOR_DEFAULT}}" = "true" ]; then
     echo "\033[1m${1}\033[22m"
   else
     echo "${1}"
@@ -86,7 +86,7 @@ _fabasoad_wrap_text_with_bold() {
 # Log level
 
 _fabasoad_is_printing_error_ok() {
-  log_level="${FABASOAD_LOG_CONFIG_LOG_LEVEL}"
+  log_level="${FABASOAD_LOG_CONFIG_LOG_LEVEL:-${FABASOAD_LOG_CONFIG_LOG_LEVEL_DEFAULT}}"
   if [ "${log_level}" != "off" ]; then
     echo "true"
   else
@@ -95,7 +95,7 @@ _fabasoad_is_printing_error_ok() {
 }
 
 _fabasoad_is_printing_warning_ok() {
-  log_level="${FABASOAD_LOG_CONFIG_LOG_LEVEL}"
+  log_level="${FABASOAD_LOG_CONFIG_LOG_LEVEL:-${FABASOAD_LOG_CONFIG_LOG_LEVEL_DEFAULT}}"
   if [ "${log_level}" != "off" ] && [ "${log_level}" != "error" ]; then
     echo "true"
   else
@@ -104,7 +104,7 @@ _fabasoad_is_printing_warning_ok() {
 }
 
 _fabasoad_is_printing_info_ok() {
-  log_level="${FABASOAD_LOG_CONFIG_LOG_LEVEL}"
+  log_level="${FABASOAD_LOG_CONFIG_LOG_LEVEL:-${FABASOAD_LOG_CONFIG_LOG_LEVEL_DEFAULT}}"
   if [ "${log_level}" = "debug" ] || [ "${log_level}" = "info" ]; then
     echo "true"
   else
@@ -113,7 +113,7 @@ _fabasoad_is_printing_info_ok() {
 }
 
 _fabasoad_is_printing_debug_ok() {
-  log_level="${FABASOAD_LOG_CONFIG_LOG_LEVEL}"
+  log_level="${FABASOAD_LOG_CONFIG_LOG_LEVEL:-${FABASOAD_LOG_CONFIG_LOG_LEVEL_DEFAULT}}"
   if [ "${log_level}" = "debug" ]; then
     echo "true"
   else
@@ -142,9 +142,9 @@ _fabasoad_log_text() {
   level="${1}"
   message="${2}"
 
-  text_msg="${FABASOAD_LOG_CONFIG_TEXT_FORMAT}"
-  text_msg=${text_msg/<header>/${FABASOAD_LOG_CONFIG_HEADER}}
-  text_msg=${text_msg/<timestamp>/$(date +"${FABASOAD_LOG_CONFIG_DATE_FORMAT}")}
+  text_msg="${FABASOAD_LOG_CONFIG_TEXT_FORMAT:-${FABASOAD_LOG_CONFIG_TEXT_FORMAT_DEFAULT}}"
+  text_msg=${text_msg/<header>/${FABASOAD_LOG_CONFIG_HEADER:-${FABASOAD_LOG_CONFIG_HEADER_DEFAULT}}}
+  text_msg=${text_msg/<timestamp>/$(date +"${FABASOAD_LOG_CONFIG_DATE_FORMAT:-${FABASOAD_LOG_CONFIG_DATE_FORMAT_DEFAULT}}")}
   text_msg=${text_msg/<level>/$(_fabasoad_wrap_text_with_bold "${level}")}
   text_msg=${text_msg/<message>/${message}}
 
@@ -153,9 +153,12 @@ _fabasoad_log_text() {
 }
 
 _fabasoad_log_json() {
+  timestamp="$(date +"${FABASOAD_LOG_CONFIG_DATE_FORMAT:-${FABASOAD_LOG_CONFIG_DATE_FORMAT_DEFAULT}}")"
+  header="${FABASOAD_LOG_CONFIG_HEADER:-${FABASOAD_LOG_CONFIG_HEADER_DEFAULT}}"
+
   json_msg=$(jq -cn \
-    --arg timestamp "$(date +"${FABASOAD_LOG_CONFIG_DATE_FORMAT}")" \
-    --arg header "${FABASOAD_LOG_CONFIG_HEADER}" \
+    --arg timestamp "${timestamp}" \
+    --arg header "${header}" \
     --arg level "${1}" \
     --arg message "${2}" \
     '{
@@ -173,8 +176,8 @@ _fabasoad_log_xml() {
   message="${2}"
 
   xml_msg="<log>"
-  xml_msg="${xml_msg}<timestamp>$(date +"${FABASOAD_LOG_CONFIG_DATE_FORMAT}")</timestamp>"
-  xml_msg="${xml_msg}<header>${FABASOAD_LOG_CONFIG_HEADER}</header>"
+  xml_msg="${xml_msg}<timestamp>$(date +"${FABASOAD_LOG_CONFIG_DATE_FORMAT:-${FABASOAD_LOG_CONFIG_DATE_FORMAT_DEFAULT}}")</timestamp>"
+  xml_msg="${xml_msg}<header>${FABASOAD_LOG_CONFIG_HEADER:-${FABASOAD_LOG_CONFIG_HEADER_DEFAULT}}</header>"
   xml_msg="${xml_msg}<level>${level}</level>"
   xml_msg="${xml_msg}<message>${message}</message>"
   xml_msg="${xml_msg}</log>"
@@ -194,8 +197,27 @@ _fabasoad_log_xml() {
 # fabasoad_log "error" "This is error message"
 # fabasoad_log "debug" "This is debug message" "./config.json"
 fabasoad_log() {
-  _fabasoad_log_init "${3:-""}"
-  _fabasoad_log_${FABASOAD_LOG_CONFIG_OUTPUT_FORMAT} "${1}" "${2}"
+  level="${1}"
+  message="${2}"
+  config_path="${3:-""}"
+
+  if [ -f "${config_path}" ]; then
+    _fabasoad_log_init "${config_path}"
+  fi
+
+  case "${FABASOAD_LOG_CONFIG_OUTPUT_FORMAT:-${FABASOAD_LOG_CONFIG_OUTPUT_FORMAT_DEFAULT}}" in
+    "xml")
+      log_func="_fabasoad_log_xml"
+      ;;
+    "json")
+      log_func="_fabasoad_log_json"
+      ;;
+    *)
+      log_func="_fabasoad_log_text"
+      ;;
+  esac
+
+  ${log_func} "${level}" "${message}"
 }
 
 # export

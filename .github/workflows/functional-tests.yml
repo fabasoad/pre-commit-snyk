@@ -20,6 +20,9 @@ defaults:
   run:
     shell: sh
 
+permissions:
+  contents: read
+
 jobs:
   functional-tests-all:
     name: All
